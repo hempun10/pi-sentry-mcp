@@ -2,10 +2,10 @@
 
 ## 0.2.0
 
-- Register Sentry MCP at runtime with Effect Schema config.
-- Optional org/project URL scoping from settings or env.
-- Drop static `mcp.json`. Server name is `sentry`.
+- Register Sentry MCP at runtime. Config uses Effect Schema.
+- Org and project can come from settings or env.
+- Removed static `mcp.json`. The server name is `sentry`.
 
 ## 0.1.0
 
-- Initial package: static MCP config and skill.
+- First release. Static MCP config and a Sentry skill.

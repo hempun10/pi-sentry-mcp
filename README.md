@@ -2,21 +2,9 @@
 
 [![CI](https://github.com/hempun10/pi-sentry-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/hempun10/pi-sentry-mcp/actions/workflows/ci.yml)
 
-Pi package that connects [Pi](https://pi.dev) to [Sentry's hosted MCP](https://mcp.sentry.dev/) (`https://mcp.sentry.dev/mcp`). It registers that server at runtime through [pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter) and ships a skill so the agent knows when to search Sentry.
+Talk to Sentry from Pi. After you sign in, the agent can search issues, events, and traces on Sentry's MCP at https://mcp.sentry.dev/mcp.
 
-This package does not implement Sentry tools. Issue search, event lookup, Seer, docs, and project management stay on Sentry's server. After OAuth, Pi calls them through the adapter's `mcp` tool.
-
-## When to use it
-
-Use this when you already run Pi and want the agent to read or triage Sentry data in the same session as your code.
-
-Do not use this as a Sentry API client, a replacement for `sentry-cli`, or a self-hosted MCP server. For self-hosted Sentry, point `sentryMcp.url` at your own MCP endpoint or use Sentry's stdio server.
-
-## Prerequisites
-
-- [Pi](https://github.com/earendil-works/pi-mono) with [pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter) installed
-- A Sentry account
-- Node.js 20+ only if you are developing this repo
+You need Pi, [pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter), and a Sentry account.
 
 ## Install
 
@@ -25,32 +13,24 @@ pi install npm:pi-mcp-adapter
 pi install git:github.com/hempun10/pi-sentry-mcp@v0.2.0
 ```
 
-Restart Pi or run `/reload`.
+Restart Pi or run `/reload`, then run `/mcp-auth sentry` and sign in in the browser.
 
-## Authenticate
+pi-mcp-adapter stores the OAuth token. This repo never sees it.
 
-The first connection opens a browser OAuth flow:
+If Pi says `pi-mcp-adapter is not installed`, install that package and reload.
 
-```text
-/mcp-auth sentry
-```
+## Limit to one org or project
 
-The adapter stores tokens. This repo never sees them.
+The default URL is `https://mcp.sentry.dev/mcp`. That can reach every org your account can access.
 
-If Pi reports `pi-mcp-adapter is not installed`, install that package first and reload.
+Put `sentryMcp` in `.pi/settings.json` for this project, or in `~/.pi/agent/settings.json` for every project. `.pi/settings.json` overrides the user file.
 
-## Configure
-
-Default URL: `https://mcp.sentry.dev/mcp` (all orgs you can access).
-
-Optional `sentryMcp` in `.pi/settings.json` (project) or `~/.pi/agent/settings.json` (user). Project wins.
-
-| Field | Required | Source | Effect |
+| Field | Required | Source | What it does |
 | --- | --- | --- | --- |
-| `url` | no | settings | Full MCP URL. Wins over org/project. |
-| `organization` | no | settings or `SENTRY_ORG` | Scopes to `.../mcp/{org}` |
-| `project` | no | settings or `SENTRY_PROJECT` | Requires organization. Scopes to `.../mcp/{org}/{project}` |
-| `experimental` | no | settings or `SENTRY_MCP_EXPERIMENTAL=1` | Appends `?experimental=1` on the built URL |
+| `url` | no | settings | Full MCP URL. Ignores organization and project. |
+| `organization` | no | settings or `SENTRY_ORG` | Uses `https://mcp.sentry.dev/mcp/{org}` |
+| `project` | no | settings or `SENTRY_PROJECT` | Needs organization. Uses `https://mcp.sentry.dev/mcp/{org}/{project}` |
+| `experimental` | no | settings or `SENTRY_MCP_EXPERIMENTAL=1` | Adds `?experimental=1` to the built URL |
 
 ```json
 {
@@ -61,22 +41,28 @@ Optional `sentryMcp` in `.pi/settings.json` (project) or `~/.pi/agent/settings.j
 }
 ```
 
-`project` without `organization` is rejected.
+If you set `project`, you must also set `organization`.
 
-## Use from Pi
+## Call it
 
-Server name: `sentry`.
+The server name is `sentry`.
 
 ```text
 mcp({ search: "unresolved issues", server: "sentry" })
 mcp({ tool: "search_issues", args: { organizationSlug: "my-org", query: "is:unresolved" } })
 ```
 
-Pass Sentry issue URLs through unchanged. `org/project` means organizationSlug/projectSlug.
+Paste Sentry issue URLs as they are. Write `org/project` as organizationSlug/projectSlug.
 
-Sentry's current tools (issues, events, traces, Seer, docs, projects) are listed at [mcp.sentry.dev](https://mcp.sentry.dev/). They change on Sentry's side.
+Sentry lists tools at [mcp.sentry.dev](https://mcp.sentry.dev/). Sentry can add or remove tools without a change in this repo.
 
-## Development
+## What this repo does not do
+
+It does not implement `search_issues` or other Sentry tools. Those run on Sentry's server.
+
+It is not `sentry-cli`. It is not a self-hosted MCP. For self-hosted Sentry, set `sentryMcp.url` to your MCP endpoint.
+
+## Develop
 
 ```bash
 npm install

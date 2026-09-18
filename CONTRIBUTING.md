@@ -8,11 +8,11 @@ npm run check
 npm test
 ```
 
-Node 20+.
+Use Node 20 or newer.
 
 ## What to change here
 
-This package owns URL building, settings/env merge, and runtime registration with pi-mcp-adapter.
+This package builds the MCP URL, reads settings and env, and registers the server with pi-mcp-adapter.
 
 Do not add wrappers or tests for Sentry tools such as `search_issues`. Those live on `https://mcp.sentry.dev/mcp`.
 
@@ -23,7 +23,7 @@ Do not add wrappers or tests for Sentry tools such as `search_issues`. Those liv
 3. `npm test` and `npm run check` must pass.
 4. Update README or CHANGELOG when behavior changes.
 
-## Release (maintainers)
+## Release for maintainers
 
 ```bash
 npm version patch
@@ -31,4 +31,8 @@ git push --follow-tags
 npm publish --access public
 ```
 
-Git installs can pin a tag: `pi install git:github.com/hempun10/pi-sentry-mcp@v0.2.0`.
+Pin a git install with a tag:
+
+```bash
+pi install git:github.com/hempun10/pi-sentry-mcp@v0.2.0
+```

@@ -1,7 +1,7 @@
 {
   "name": "pi-sentry-mcp",
   "version": "0.2.0",
-  "description": "Sentry MCP for Pi — hosted https://mcp.sentry.dev/mcp with OAuth",
+  "description": "Sentry MCP for Pi. Connects to https://mcp.sentry.dev/mcp with OAuth.",
   "keywords": [
     "pi-package",
     "pi",
