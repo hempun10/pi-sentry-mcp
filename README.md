@@ -7,6 +7,8 @@ Talk to Sentry from Pi. After you sign in, the agent can search issues, events, 
 
 You need Pi, [pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter), and a Sentry account.
 
+Published as `pi-sentry-mcp` on [npm](https://www.npmjs.com/package/pi-sentry-mcp). The `pi-package` keyword lists it on [pi.dev/packages](https://pi.dev/packages).
+
 ## Install
 
 ```bash

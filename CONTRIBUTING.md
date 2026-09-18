@@ -31,8 +31,8 @@ git push --follow-tags
 npm publish --access public
 ```
 
-Pin a git install with a tag:
+Install the published package with:
 
 ```bash
-pi install git:github.com/hempun10/pi-sentry-mcp@v0.2.0
+pi install npm:pi-sentry-mcp
 ```
