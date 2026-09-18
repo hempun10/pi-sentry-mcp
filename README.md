@@ -1,6 +1,7 @@
 # pi-sentry-mcp
 
 [![CI](https://github.com/hempun10/pi-sentry-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/hempun10/pi-sentry-mcp/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/pi-sentry-mcp)](https://www.npmjs.com/package/pi-sentry-mcp)
 
 Talk to Sentry from Pi. After you sign in, the agent can search issues, events, and traces on Sentry's MCP at https://mcp.sentry.dev/mcp.
 
@@ -10,7 +11,7 @@ You need Pi, [pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter), and
 
 ```bash
 pi install npm:pi-mcp-adapter
-pi install git:github.com/hempun10/pi-sentry-mcp@v0.2.0
+pi install npm:pi-sentry-mcp
 ```
 
 Restart Pi or run `/reload`, then run `/mcp-auth sentry` and sign in in the browser.
