@@ -7,7 +7,7 @@ Talk to Sentry from Pi. After you sign in, the agent can search issues, events, 
 
 You need Pi, [pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter), and a Sentry account.
 
-Published as `pi-sentry-mcp` on [npm](https://www.npmjs.com/package/pi-sentry-mcp). The `pi-package` keyword lists it on [pi.dev/packages](https://pi.dev/packages).
+Published as `pi-sentry-mcp` on [npm](https://www.npmjs.com/package/pi-sentry-mcp). The `pi-package` keyword lists it on [pi.dev/packages](https://pi.dev/packages). Landing page: https://hempun10.github.io/pi-sentry-mcp/
 
 ## Install
 
@@ -71,6 +71,14 @@ It is not `sentry-cli`. It is not a self-hosted MCP. For self-hosted Sentry, set
 npm install
 npm run check
 npm test
+```
+
+Landing page:
+
+```bash
+cd site
+npm install
+npm run dev
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
