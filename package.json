@@ -16,6 +16,13 @@
     "type": "git",
     "url": "git+https://github.com/hempun10/pi-sentry-mcp.git"
   },
+  "homepage": "https://github.com/hempun10/pi-sentry-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/hempun10/pi-sentry-mcp/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "files": [
     "extensions",
     "src",
